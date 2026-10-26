@@ -128,7 +128,8 @@
   </footer>
 
   <script>
-    const VERSIONS = [
+    const REPO = "Tungbro/TCL-Launcher";
+    let VERSIONS = [
       { version: "1.2.1", tag: "v1.2.1", file: "TCL-1.2.1-win-x64.zip", size: 108106447, date: "2026.10.26", latest: true, note: "TCL 白色主题 · 完整离线版", sha: "FDEE6669344229F92278854F4FEEAE7E1C4030DB2F660F42A81ED80D25619E31" },
       { version: "1.2.0", tag: "v1.2.0", file: "Tungbros-1.2.0-win-x64.zip", size: 141553376, date: "2026.10.25", note: "旧品牌 Tungbro's · 历史版本", sha: "18FC35436312AD26AF2CA5AE32868875B111E1390B1431E723CE9A1B3F044AA8" },
       { version: "1.1.3", tag: "v1.1.3", file: "Tungbros-1.1.3-win-x64.zip", size: 137716154, date: "2026.10.24", note: "历史版本 · 启动修复", sha: "7AB464D3345C353D9A373F8160B79810E489B46DB01EC4435918E30FA0A2D70D" },
@@ -136,30 +137,36 @@
       { version: "1.1.1", tag: "v1.1.1", file: "Tungbros-1.1.1-win-x64.zip", size: 137713323, date: "2026.10.22", note: "历史版本 · 安装体验修复", sha: "76111A4D1AAC413F4A29DFC3F20CB2482F831B01737E65EE1E5F5DDBC4E48F68" },
       { version: "1.1.0", tag: "v1.1.0", file: "Tungbros-1.1.0-win-x64.zip", size: 137003449, date: "2026.10.21", note: "历史版本 · 旧品牌初始版", sha: "88EE25A511FCE4105636DEA11AB5114B4520CEBB820ABB3DFC984279AB3F9A17" }
     ];
+    const KNOWN_SHA = Object.fromEntries(VERSIONS.map((v) => [v.version, v.sha]));
+    const KNOWN_DATE = Object.fromEntries(VERSIONS.map((v) => [v.version, v.date]));
+    const versionRank = (version) => (String(version).match(/\d+/g) || []).reduce((score, part) => score * 1000 + Number(part), 0);
 
     const select = document.getElementById("version-select");
     const history = document.getElementById("version-history");
     const fmt = (n) => n.toLocaleString("en-US");
     const shortSha = (sha) => sha.slice(0, 8) + "…" + sha.slice(-8);
-    const assetUrl = (v) => `https://github.com/Tungbro/TCL-Launcher/releases/download/${v.tag}/${v.file}`;
+    const assetUrl = (v) => v.url || `https://github.com/Tungbro/TCL-Launcher/releases/download/${v.tag}/${v.file}`;
 
-    VERSIONS.forEach((v, index) => {
-      const option = document.createElement("option");
-      option.value = String(index);
-      option.textContent = `${v.version}${v.latest ? "（最新版）" : "（历史版本）"}`;
-      select.appendChild(option);
-    });
+    function renderVersions() {
+      select.innerHTML = "";
+      history.innerHTML = "";
+      VERSIONS.forEach((v, index) => {
+        const option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = `${v.version}${v.latest ? "（最新版）" : "（历史版本）"}`;
+        select.appendChild(option);
 
-    VERSIONS.forEach((v, index) => {
-      const card = document.createElement("article");
-      card.className = "version-card" + (v.latest ? " current" : "");
-      card.innerHTML = `
-        <div class="version-card-top"><strong>v${v.version}</strong>${v.latest ? "<span>最新版</span>" : "<span>历史版本</span>"}</div>
-        <p>${v.note}</p>
-        <small>${fmt(v.size)} 字节 · ${v.date}</small>
-        <button type="button" data-version="${index}">下载这个版本</button>`;
-      history.appendChild(card);
-    });
+        const card = document.createElement("article");
+        card.className = "version-card" + (v.latest ? " current" : "");
+        card.innerHTML = `
+          <div class="version-card-top"><strong>v${v.version}</strong>${v.latest ? "<span>最新版</span>" : "<span>历史版本</span>"}</div>
+          <p>${v.note}</p>
+          <small>${fmt(v.size)} 字节 · ${v.date}</small>
+          <button type="button" data-version="${index}">下载这个版本</button>`;
+        history.appendChild(card);
+      });
+      selectVersion(0);
+    }
 
     function selectVersion(index) {
       const v = VERSIONS[index];
@@ -175,11 +182,47 @@
       document.getElementById("version-status").textContent = v.latest ? "当前为最新版" : "当前为历史版本";
       document.getElementById("file-name").textContent = v.file;
       document.getElementById("file-size").textContent = `${fmt(v.size)} 字节`;
-      document.getElementById("file-sha").textContent = shortSha(v.sha);
-      document.getElementById("file-sha").title = v.sha;
+      document.getElementById("file-sha").textContent = v.sha ? shortSha(v.sha) : "未提供（见 Release）";
+      document.getElementById("file-sha").title = v.sha || "";
       document.querySelectorAll(".version-card").forEach((card, i) => card.classList.toggle("selected", i === index));
       document.querySelectorAll("[data-version]").forEach((button) => button.closest(".version-card").classList.toggle("selected", Number(button.dataset.version) === index));
       document.querySelector(".nav-download").textContent = `下载 ${v.latest ? "最新版" : "v" + v.version}`;
+    }
+
+    async function loadLatestReleases() {
+      try {
+        const response = await fetch(`https://api.github.com/repos/${REPO}/releases?per_page=100`, { cache: "no-store", headers: { Accept: "application/vnd.github+json" } });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const releases = await response.json();
+        const remote = releases
+          .filter((release) => !release.draft)
+          .map((release) => {
+            const zip = (release.assets || []).find((asset) => /\.zip$/i.test(asset.name) && !/\.sha256$/i.test(asset.name));
+            if (!zip) return null;
+            const version = String(release.tag_name || zip.name).replace(/^v/i, "").split("-win-")[0];
+            return {
+              version,
+              tag: release.tag_name,
+              file: zip.name,
+              size: zip.size,
+              date: KNOWN_DATE[version] || (release.published_at || "").slice(0, 10).replace(/-/g, "."),
+              latest: false,
+              note: release.name || "GitHub Release",
+              sha: KNOWN_SHA[version] || "",
+              url: zip.browser_download_url
+            };
+          })
+          .filter(Boolean)
+          .sort((a, b) => versionRank(b.version) - versionRank(a.version));
+        if (!remote.length) throw new Error("没有可下载的 Release 资产");
+        remote[0].latest = true;
+        VERSIONS = remote;
+        renderVersions();
+        document.getElementById("version-status").textContent = "已同步 GitHub Releases";
+      } catch (error) {
+        console.warn("Release 同步失败，使用内置版本列表：", error);
+        renderVersions();
+      }
     }
 
     select.addEventListener("change", (event) => selectVersion(Number(event.target.value)));
@@ -192,6 +235,7 @@
     document.querySelectorAll("[data-copy-sha]").forEach((button) => {
       button.addEventListener("click", async () => {
         const sha = VERSIONS[Number(select.value)].sha;
+        if (!sha) { button.textContent = "该版本未提供 SHA"; return; }
         try { await navigator.clipboard.writeText(sha); button.textContent = "已复制"; }
         catch { button.textContent = "复制失败"; }
       });
@@ -202,7 +246,8 @@
         catch { button.textContent = button.dataset.copy; }
       });
     });
-    selectVersion(0);
+    renderVersions();
+    loadLatestReleases();
   </script>
 </body>
 </html>
