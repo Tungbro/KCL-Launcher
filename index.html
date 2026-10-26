@@ -18,6 +18,7 @@
     <nav>
       <a href="#features">功能</a>
       <a href="#download">下载</a>
+      <a href="#history">历史版本</a>
       <a href="#server">服务器</a>
       <a class="nav-download" data-download href="#">下载 1.2.1</a>
     </nav>
@@ -60,33 +61,48 @@
     <section class="section download" id="download">
       <div class="section-head">
         <span>02 / DOWNLOAD</span>
-        <h2>下载完整离线版</h2>
-        <p>ZIP 根目录直接包含 <code>TCL启动器.exe</code>，解压后双击第一层的 exe 即可，不需要再找子文件夹。不包含下载器或自解压外壳。</p>
+        <h2>下载启动器</h2>
+        <p>默认选择最新版。也可以切换到历史版本；所有版本都放在 GitHub Releases，不占用仓库普通文件空间。</p>
+      </div>
+      <div class="version-toolbar">
+        <label for="version-select">选择版本</label>
+        <select id="version-select" aria-label="选择启动器版本"></select>
+        <span id="version-status" class="version-status">最新版</span>
       </div>
       <div class="download-card">
         <div>
-          <div class="badges"><span>v1.2.1</span><span>Windows x64</span><span>离线</span></div>
-          <h3>TCL启动器 1.2.1</h3>
-          <p>完整 Electron 运行时 · 约 106 MB · 2026.10.26</p>
-          <a class="button primary wide" data-download href="#">前往 GitHub Release 下载</a>
-          <p class="small">如果按钮没有反应，请把 <code>index.html</code> 里的 <code>TCL_DOWNLOAD_URL</code> 改成你的 Release 地址。</p>
+          <div class="badges"><span id="version-badge">v1.2.1</span><span>Windows x64</span><span id="version-kind">最新版</span></div>
+          <h3 id="download-title">TCL启动器 1.2.1</h3>
+          <p id="download-desc">完整 Electron 运行时 · 约 106 MB · 2026.10.26</p>
+          <a id="download-link" class="button primary wide" data-download href="#">前往 GitHub Release 下载</a>
+          <p class="small">下载后解压，双击根目录里的 exe。历史版本使用旧品牌与旧界面，仅用于回退。</p>
         </div>
         <aside>
           <h4>文件信息</h4>
           <dl>
-            <div><dt>文件名</dt><dd><code>TCL-1.2.1-win-x64.zip</code></dd></div>
-            <div><dt>大小</dt><dd>108,106,447 字节</dd></div>
-            <div><dt>SHA-256</dt><dd><code>FDEE6669…25619E31</code></dd></div>
+            <div><dt>文件名</dt><dd><code id="file-name">TCL-1.2.1-win-x64.zip</code></dd></div>
+            <div><dt>大小</dt><dd id="file-size">108,106,447 字节</dd></div>
+            <div><dt>SHA-256</dt><dd><code id="file-sha">FDEE6669…25619E31</code></dd></div>
             <div><dt>运行方式</dt><dd>解压后双击根目录 exe</dd></div>
             <div><dt>数据目录</dt><dd><code>%APPDATA%\TungbrosLauncher</code></dd></div>
           </dl>
+          <button type="button" class="copy-sha" data-copy-sha>复制完整 SHA-256</button>
         </aside>
       </div>
     </section>
 
+    <section class="section" id="history">
+      <div class="section-head">
+        <span>03 / ARCHIVE</span>
+        <h2>历史版本</h2>
+        <p>点击任意版本即可切换到对应下载。建议普通用户使用最新版；旧版本保留原样，方便回退或收藏。</p>
+      </div>
+      <div class="version-history" id="version-history"></div>
+    </section>
+
     <section class="section server" id="server">
       <div class="section-head">
-        <span>03 / SERVER</span>
+        <span>04 / SERVER</span>
         <h2>MKZY Minecraft 服务器</h2>
       </div>
       <div class="server-grid">
@@ -112,15 +128,81 @@
   </footer>
 
   <script>
-    // 只需改这一行：把地址换成你的 GitHub Release 资源链接。
-    const TCL_DOWNLOAD_URL = "https://github.com/Tungbro/TCL-Launcher/releases/download/v1.2.1/TCL-1.2.1-win-x64.zip";
-    document.querySelectorAll("[data-download]").forEach((a) => { a.href = TCL_DOWNLOAD_URL; });
+    const VERSIONS = [
+      { version: "1.2.1", tag: "v1.2.1", file: "TCL-1.2.1-win-x64.zip", size: 108106447, date: "2026.10.26", latest: true, note: "TCL 白色主题 · 完整离线版", sha: "FDEE6669344229F92278854F4FEEAE7E1C4030DB2F660F42A81ED80D25619E31" },
+      { version: "1.2.0", tag: "v1.2.0", file: "Tungbros-1.2.0-win-x64.zip", size: 141553376, date: "2026.10.25", note: "旧品牌 Tungbro's · 历史版本", sha: "18FC35436312AD26AF2CA5AE32868875B111E1390B1431E723CE9A1B3F044AA8" },
+      { version: "1.1.3", tag: "v1.1.3", file: "Tungbros-1.1.3-win-x64.zip", size: 137716154, date: "2026.10.24", note: "历史版本 · 启动修复", sha: "7AB464D3345C353D9A373F8160B79810E489B46DB01EC4435918E30FA0A2D70D" },
+      { version: "1.1.2", tag: "v1.1.2", file: "Tungbros-1.1.2-win-x64.zip", size: 137715643, date: "2026.10.23", note: "历史版本 · 下载路径修复", sha: "0A36D18D22338CCACDC50DB9E176E5AB60944C0D12635C40391A588B8C969EE2" },
+      { version: "1.1.1", tag: "v1.1.1", file: "Tungbros-1.1.1-win-x64.zip", size: 137713323, date: "2026.10.22", note: "历史版本 · 安装体验修复", sha: "76111A4D1AAC413F4A29DFC3F20CB2482F831B01737E65EE1E5F5DDBC4E48F68" },
+      { version: "1.1.0", tag: "v1.1.0", file: "Tungbros-1.1.0-win-x64.zip", size: 137003449, date: "2026.10.21", note: "历史版本 · 旧品牌初始版", sha: "88EE25A511FCE4105636DEA11AB5114B4520CEBB820ABB3DFC984279AB3F9A17" }
+    ];
+
+    const select = document.getElementById("version-select");
+    const history = document.getElementById("version-history");
+    const fmt = (n) => n.toLocaleString("en-US");
+    const shortSha = (sha) => sha.slice(0, 8) + "…" + sha.slice(-8);
+    const assetUrl = (v) => `https://github.com/Tungbro/TCL-Launcher/releases/download/${v.tag}/${v.file}`;
+
+    VERSIONS.forEach((v, index) => {
+      const option = document.createElement("option");
+      option.value = String(index);
+      option.textContent = `${v.version}${v.latest ? "（最新版）" : "（历史版本）"}`;
+      select.appendChild(option);
+    });
+
+    VERSIONS.forEach((v, index) => {
+      const card = document.createElement("article");
+      card.className = "version-card" + (v.latest ? " current" : "");
+      card.innerHTML = `
+        <div class="version-card-top"><strong>v${v.version}</strong>${v.latest ? "<span>最新版</span>" : "<span>历史版本</span>"}</div>
+        <p>${v.note}</p>
+        <small>${fmt(v.size)} 字节 · ${v.date}</small>
+        <button type="button" data-version="${index}">下载这个版本</button>`;
+      history.appendChild(card);
+    });
+
+    function selectVersion(index) {
+      const v = VERSIONS[index];
+      if (!v) return;
+      select.value = String(index);
+      const url = assetUrl(v);
+      document.querySelectorAll("[data-download]").forEach((a) => { a.href = url; });
+      document.getElementById("download-link").download = v.file;
+      document.getElementById("download-title").textContent = `TCL启动器 ${v.version}`;
+      document.getElementById("download-desc").textContent = `${v.note} · 约 ${Math.round(v.size / 1048576)} MB · ${v.date}`;
+      document.getElementById("version-badge").textContent = `v${v.version}`;
+      document.getElementById("version-kind").textContent = v.latest ? "最新版" : "历史版本";
+      document.getElementById("version-status").textContent = v.latest ? "当前为最新版" : "当前为历史版本";
+      document.getElementById("file-name").textContent = v.file;
+      document.getElementById("file-size").textContent = `${fmt(v.size)} 字节`;
+      document.getElementById("file-sha").textContent = shortSha(v.sha);
+      document.getElementById("file-sha").title = v.sha;
+      document.querySelectorAll(".version-card").forEach((card, i) => card.classList.toggle("selected", i === index));
+      document.querySelectorAll("[data-version]").forEach((button) => button.closest(".version-card").classList.toggle("selected", Number(button.dataset.version) === index));
+      document.querySelector(".nav-download").textContent = `下载 ${v.latest ? "最新版" : "v" + v.version}`;
+    }
+
+    select.addEventListener("change", (event) => selectVersion(Number(event.target.value)));
+    document.getElementById("version-history").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-version]");
+      if (!button) return;
+      selectVersion(Number(button.dataset.version));
+      document.getElementById("download").scrollIntoView({ behavior: "smooth" });
+    });
+    document.querySelectorAll("[data-copy-sha]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const sha = VERSIONS[Number(select.value)].sha;
+        try { await navigator.clipboard.writeText(sha); button.textContent = "已复制"; }
+        catch { button.textContent = "复制失败"; }
+      });
+    });
     document.querySelectorAll("[data-copy]").forEach((button) => {
       button.addEventListener("click", async () => {
         try { await navigator.clipboard.writeText(button.dataset.copy); button.textContent = "已复制"; }
         catch { button.textContent = button.dataset.copy; }
       });
     });
+    selectVersion(0);
   </script>
 </body>
 </html>
