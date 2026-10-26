@@ -28,7 +28,7 @@ const TCL_DOWNLOAD_URL = "https://github.com/YOUR_NAME/TCL-Launcher/releases/dow
 
 把本目录作为仓库根目录，在 **Settings → Pages** 选择 `Deploy from a branch`，分支 `main`、目录 `/ (root)`。
 
-也可以使用 `.github/workflows/pages.yml` 自动部署。
+当前仓库已使用 `main` 分支根目录部署；修改 `TCL_DOWNLOAD_URL` 后重新上传 `index.html` 即可。
 
 ## 文件
 
