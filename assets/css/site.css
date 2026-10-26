@@ -107,6 +107,9 @@ footer { max-width: 1220px; margin: 0 auto; padding: 30px clamp(18px, 4vw, 46px)
 footer p { margin: 0; }
 .copy-sha { margin-top: 14px; width: 100%; padding: 7px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; color: var(--green-deep); font: inherit; font-size: 10px; cursor: pointer; }
 .version-toolbar { display: flex; align-items: center; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+.hero-version-toolbar { margin: 0 0 18px; padding: 8px 10px; width: fit-content; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.76); box-shadow: 0 8px 24px rgba(40,62,34,.06); }
+.hero-version-toolbar select { min-width: 200px; padding: 7px 10px; }
+.hero-version-toolbar .version-status { white-space: nowrap; }
 .version-toolbar label { color: var(--muted); font-size: 11px; letter-spacing: .08em; }
 .version-toolbar select { min-width: 210px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 9px; background: #fff; color: var(--ink); font: inherit; font-size: 12px; }
 .version-status { padding: 4px 9px; border-radius: 99px; background: var(--green-soft); color: var(--green-deep); font-size: 9px; }
