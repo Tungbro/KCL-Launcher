@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#071018"/>
+      <stop offset="0.34" stop-color="#102a2b"/>
+      <stop offset="0.62" stop-color="#38533b"/>
+      <stop offset="0.82" stop-color="#a58457"/>
+      <stop offset="1" stop-color="#e3ab66"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffe4a3" stop-opacity="0.9"/>
+      <stop offset="0.24" stop-color="#f5c879" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#e7a55e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="farM" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#415d4d"/>
+      <stop offset="1" stop-color="#23382f"/>
+    </linearGradient>
+    <linearGradient id="midM" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c4634"/>
+      <stop offset="1" stop-color="#15241b"/>
+    </linearGradient>
+    <linearGradient id="nearM" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a2b1e"/>
+      <stop offset="1" stop-color="#0a120d"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6e9e43"/>
+      <stop offset="0.22" stop-color="#4e7833"/>
+      <stop offset="1" stop-color="#233a1c"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ea57e" stop-opacity="0.55"/>
+      <stop offset="0.15" stop-color="#4c6f60" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#12231d" stop-opacity="0.94"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe3a5" stop-opacity="0.17"/>
+      <stop offset="1" stop-color="#ffe3a5" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="cubeTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c9ff79"/>
+      <stop offset="1" stop-color="#8ec444"/>
+    </linearGradient>
+    <linearGradient id="cubeLeft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5d8e37"/>
+      <stop offset="1" stop-color="#2c4a22"/>
+    </linearGradient>
+    <linearGradient id="cubeRight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#83b447"/>
+      <stop offset="1" stop-color="#3d6229"/>
+    </linearGradient>
+    <filter id="blur20"><feGaussianBlur stdDeviation="20"/></filter>
+    <filter id="blur8"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="stars" width="160" height="130" patternUnits="userSpaceOnUse">
+      <rect x="18" y="23" width="2" height="2" fill="#dcebd0" opacity=".52"/>
+      <rect x="78" y="12" width="1.5" height="1.5" fill="#dcebd0" opacity=".33"/>
+      <rect x="120" y="54" width="2" height="2" fill="#dcebd0" opacity=".45"/>
+      <rect x="46" y="88" width="1.5" height="1.5" fill="#dcebd0" opacity=".27"/>
+      <rect x="143" y="101" width="1" height="1" fill="#dcebd0" opacity=".36"/>
+      <rect x="96" y="72" width="1" height="1" fill="#ffe7b0" opacity=".42"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <rect width="1600" height="620" fill="url(#stars)"/>
+
+  <circle cx="1178" cy="276" r="265" fill="url(#sunGlow)"/>
+  <rect x="1146" y="232" width="64" height="64" fill="#ffe0a0" opacity=".9"/>
+  <rect x="1130" y="248" width="96" height="32" fill="#ffe0a0" opacity=".45" filter="url(#blur8)"/>
+
+  <g opacity=".5">
+    <rect x="146" y="225" width="190" height="10" rx="3" fill="#b8d4b5" opacity=".22"/>
+    <rect x="260" y="204" width="130" height="12" rx="4" fill="#c3ddbd" opacity=".18"/>
+    <rect x="1290" y="172" width="145" height="9" rx="3" fill="#c3ddbd" opacity=".18"/>
+    <rect x="1378" y="196" width="82" height="8" rx="3" fill="#d6e5ca" opacity=".14"/>
+  </g>
+
+  <g opacity=".24">
+    <polygon points="1180,210 1320,620 1540,620" fill="url(#beam)"/>
+    <polygon points="1190,220 1080,620 1280,620" fill="url(#beam)"/>
+  </g>
+
+  <!-- far mountains -->
+  <g shape-rendering="crispEdges">
+    <path d="M0 656 L0 520 L54 520 L54 474 L108 474 L108 430 L158 430 L158 470 L214 470 L214 512 L286 512 L286 458 L338 458 L338 410 L388 410 L388 462 L452 462 L452 506 L518 506 L518 452 L576 452 L576 406 L628 406 L628 454 L690 454 L690 498 L760 498 L760 448 L812 448 L812 398 L866 398 L866 440 L924 440 L924 486 L990 486 L990 430 L1048 430 L1048 380 L1100 380 L1100 420 L1162 420 L1162 472 L1230 472 L1230 428 L1290 428 L1290 470 L1350 470 L1350 438 L1414 438 L1414 486 L1482 486 L1482 446 L1540 446 L1540 494 L1600 494 L1600 656 Z" fill="url(#farM)" opacity=".74"/>
+    <path d="M0 690 L0 592 L72 592 L72 556 L142 556 L142 512 L212 512 L212 548 L286 548 L286 592 L372 592 L372 548 L442 548 L442 506 L510 506 L510 548 L586 548 L586 596 L672 596 L672 552 L742 552 L742 508 L814 508 L814 552 L892 552 L892 598 L972 598 L972 552 L1042 552 L1042 506 L1114 506 L1114 548 L1190 548 L1190 594 L1272 594 L1272 548 L1344 548 L1344 508 L1418 508 L1418 554 L1494 554 L1494 596 L1600 596 L1600 690 Z" fill="#1e3428" opacity=".85"/>
+    <path d="M0 730 L0 632 L88 632 L88 600 L170 600 L170 642 L256 642 L256 606 L342 606 L342 650 L436 650 L436 612 L522 612 L522 654 L614 654 L614 618 L704 618 L704 658 L800 658 L800 626 L888 626 L888 664 L978 664 L978 628 L1070 628 L1070 662 L1160 662 L1160 626 L1252 626 L1252 660 L1340 660 L1340 628 L1428 628 L1428 662 L1514 662 L1514 636 L1600 636 L1600 730 Z" fill="#172b20" opacity=".9"/>
+  </g>
+
+  <!-- mid ridge with pixel cliffs -->
+  <g shape-rendering="crispEdges">
+    <path d="M0 782 L0 690 L72 690 L72 666 L150 666 L150 690 L230 690 L230 654 L306 654 L306 684 L382 684 L382 648 L458 648 L458 680 L542 680 L542 654 L618 654 L618 690 L704 690 L704 662 L786 662 L786 694 L868 694 L868 666 L948 666 L948 700 L1034 700 L1034 668 L1118 668 L1118 700 L1206 700 L1206 674 L1292 674 L1292 704 L1382 704 L1382 680 L1470 680 L1470 708 L1556 708 L1556 684 L1600 684 L1600 782 Z" fill="url(#midM)"/>
+    <path d="M230 654 L230 620 L246 620 L246 636 L262 636 L262 654 M618 654 L618 614 L638 614 L638 632 L658 632 L658 654 M1034 668 L1034 638 L1052 638 L1052 650 L1070 650 L1070 668 M1382 680 L1382 648 L1398 648 L1398 662 L1418 662 L1418 680" stroke="#0e1b13" stroke-width="8" fill="none"/>
+  </g>
+
+  <!-- cliff face / valley -->
+  <g shape-rendering="crispEdges">
+    <path d="M0 900 L0 780 L70 780 L70 748 L148 748 L148 722 L228 722 L228 750 L302 750 L302 728 L380 728 L380 756 L452 756 L452 736 L520 736 L520 764 L590 764 L590 778 L664 778 L664 752 L738 752 L738 778 L812 778 L812 754 L884 754 L884 782 L960 782 L960 758 L1042 758 L1042 786 L1126 786 L1126 762 L1208 762 L1208 788 L1290 788 L1290 766 L1374 766 L1374 792 L1456 792 L1456 770 L1540 770 L1540 794 L1600 794 L1600 900 Z" fill="url(#nearM)" opacity=".92"/>
+    <path d="M0 810 L0 780 L70 780 L70 748 L148 748 L148 722 L228 722 L228 750 L302 750 L302 728 L380 728 L380 756 L452 756 L452 736 L520 736 L520 764 L590 764 L590 778 L664 778 L664 752 L738 752 L738 778 L812 778 L812 754 L884 754 L884 782 L960 782 L960 758 L1042 758 L1042 786 L1126 786 L1126 762 L1208 762 L1208 788 L1290 788 L1290 766 L1374 766 L1374 792 L1456 792 L1456 770 L1540 770 L1540 794 L1600 794 L1600 810 Z" fill="#4c7738" opacity=".35"/>
+  </g>
+
+  <!-- lake -->
+  <path d="M764 900 L764 796 L868 796 L868 784 L974 784 L974 792 L1082 792 L1082 800 L1198 800 L1198 792 L1306 792 L1306 800 L1420 800 L1420 794 L1520 794 L1520 806 L1600 806 L1600 900 Z" fill="url(#water)"/>
+  <g opacity=".55">
+    <rect x="882" y="824" width="140" height="3" fill="#a5c7a7" opacity=".35"/>
+    <rect x="1050" y="842" width="210" height="2" fill="#a5c7a7" opacity=".22"/>
+    <rect x="930" y="862" width="110" height="2" fill="#a5c7a7" opacity=".18"/>
+    <rect x="1210" y="872" width="250" height="3" fill="#e2bd80" opacity=".24"/>
+    <rect x="800" y="884" width="88" height="2" fill="#a5c7a7" opacity=".16"/>
+  </g>
+  <g opacity=".16" filter="url(#blur8)">
+    <rect x="1160" y="780" width="36" height="120" fill="#ffd98e"/>
+    <rect x="1180" y="800" width="54" height="100" fill="#ffd98e"/>
+  </g>
+
+  <!-- foreground hill left -->
+  <g shape-rendering="crispEdges">
+    <path d="M0 900 L0 806 L64 806 L64 774 L146 774 L146 748 L232 748 L232 772 L320 772 L320 750 L408 750 L408 776 L502 776 L502 754 L590 754 L590 782 L680 782 L680 764 L760 764 L760 900 Z" fill="url(#grass)"/>
+    <path d="M0 806 L0 792 L64 792 L64 760 L146 760 L146 734 L232 734 L232 758 L320 758 L320 736 L408 736 L408 762 L502 762 L502 740 L590 740 L590 768 L680 768 L680 750 L760 750 L760 806 Z" fill="#81af4c" opacity=".36"/>
+  </g>
+
+  <!-- pixel trees -->
+  <g>
+    <rect x="132" y="690" width="10" height="64" fill="#2a2117"/>
+    <rect x="112" y="640" width="50" height="20" fill="#28411f"/>
+    <rect x="102" y="660" width="70" height="22" fill="#315126"/>
+    <rect x="120" y="618" width="34" height="26" fill="#3b5f2b"/>
+    <rect x="126" y="606" width="22" height="14" fill="#496f33"/>
+    <rect x="112" y="680" width="52" height="10" fill="#27421e"/>
+    <g opacity=".22"><rect x="112" y="640" width="50" height="4" fill="#a6d16c"/><rect x="102" y="660" width="70" height="4" fill="#a6d16c"/></g>
+  </g>
+  <g>
+    <rect x="510" y="694" width="8" height="60" fill="#241d14"/>
+    <rect x="490" y="660" width="46" height="16" fill="#223b1b"/>
+    <rect x="484" y="676" width="58" height="20" fill="#2f4d24"/>
+    <rect x="500" y="644" width="28" height="18" fill="#3e612e"/>
+    <g opacity=".2"><rect x="490" y="660" width="46" height="3" fill="#a6d16c"/></g>
+  </g>
+  <g>
+    <rect x="1420" y="716" width="9" height="62" fill="#231d14"/>
+    <rect x="1398" y="676" width="52" height="18" fill="#20371a"/>
+    <rect x="1392" y="694" width="64" height="24" fill="#2b4621"/>
+    <rect x="1410" y="658" width="30" height="22" fill="#3d5c2c"/>
+    <g opacity=".18"><rect x="1398" y="676" width="52" height="3" fill="#b4dd77"/></g>
+  </g>
+
+  <!-- floating voxel island -->
+  <g transform="translate(196 258)">
+    <polygon points="0,44 74,84 74,142 0,102" fill="#233d24" opacity=".8"/>
+    <polygon points="148,44 74,84 74,142 148,102" fill="#1a2c1d" opacity=".8"/>
+    <polygon points="74,4 148,44 74,84 0,44" fill="#3d6129" opacity=".85"/>
+    <rect x="22" y="36" width="26" height="16" fill="#517d30" opacity=".5"/>
+    <rect x="88" y="30" width="32" height="18" fill="#456e2a" opacity=".55"/>
+    <rect x="58" y="66" width="18" height="9" fill="#456e2a" opacity=".5"/>
+  </g>
+  <!-- floating cubes -->
+  <g transform="translate(284 202) rotate(30 22 22)">
+    <polygon points="22,0 44,11 22,22 0,11" fill="url(#cubeTop)"/>
+    <polygon points="0,11 22,22 22,44 0,33" fill="url(#cubeLeft)"/>
+    <polygon points="44,11 22,22 22,44 44,33" fill="url(#cubeRight)"/>
+  </g>
+  <g transform="translate(1332 350) rotate(30 16 16)" opacity=".85">
+    <polygon points="16,0 32,8 16,16 0,8" fill="#9ce25f"/>
+    <polygon points="0,8 16,16 16,32 0,24" fill="#3e6d2d"/>
+    <polygon points="32,8 16,16 16,32 32,24" fill="#5c8c39"/>
+  </g>
+  <g transform="translate(1250 290) rotate(30 11 11)" opacity=".55">
+    <polygon points="11,0 22,5 11,11 0,5" fill="#e0c18b"/>
+    <polygon points="0,5 11,11 11,22 0,16" fill="#6e5634"/>
+    <polygon points="22,5 11,11 11,22 22,16" fill="#9b7a47"/>
+  </g>
+
+  <!-- fireflies -->
+  <g fill="#d8ff7d" filter="url(#glow)">
+    <circle cx="366" cy="560" r="2.4" opacity=".8"/>
+    <circle cx="446" cy="638" r="1.7" opacity=".55"/>
+    <circle cx="618" cy="586" r="2" opacity=".6"/>
+    <circle cx="916" cy="590" r="1.8" opacity=".45"/>
+    <circle cx="1090" cy="548" r="2.2" opacity=".5"/>
+    <circle cx="1262" cy="612" r="1.6" opacity=".55"/>
+    <circle cx="742" cy="682" r="2.6" opacity=".7"/>
+    <circle cx="1378" cy="690" r="1.8" opacity=".4"/>
+  </g>
+
+  <!-- foreground grass blades -->
+  <g fill="#0a130c" opacity=".9">
+    <path d="M0 900 L0 848 L18 848 L18 832 L28 832 L28 850 L52 850 L52 838 L70 838 L70 900 Z"/>
+    <path d="M1540 900 L1540 850 L1560 850 L1560 838 L1578 838 L1578 854 L1598 854 L1598 900 Z"/>
+    <path d="M700 900 L700 862 L714 862 L714 850 L728 850 L728 864 L750 864 L750 900 Z"/>
+  </g>
+
+  <rect width="1600" height="900" fill="#07100a" opacity=".08"/>
+</svg>
