@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TCL启动器 · 下载</title>
-  <meta name="description" content="TCL启动器 1.2.1 完整离线版下载：支持 Vanilla、Fabric、Quilt、Forge、NeoForge，整合游戏与 Mod 下载、版本隔离、开服工具与 e4mc 联机。" />
+  <meta name="description" content="TCL启动器 1.2.2 完整离线版下载：支持 Vanilla、Fabric、Quilt、Forge、NeoForge，整合游戏与 Mod 下载、版本隔离、开服工具与 e4mc 联机。" />
   <meta name="theme-color" content="#eef3e8" />
   <link rel="icon" href="assets/img/favicon.png" />
   <link rel="stylesheet" href="assets/css/site.css" />
@@ -20,7 +20,7 @@
       <a href="#download">下载</a>
       <a href="#history">历史版本</a>
       <a href="#server">服务器</a>
-      <a class="nav-download" data-download href="#">下载 1.2.1</a>
+      <a class="nav-download" data-download href="#">下载 1.2.2</a>
     </nav>
   </header>
 
@@ -28,7 +28,7 @@
     <section class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="kicker">TCL LAUNCHER · 1.2.1</p>
+        <p class="kicker">TCL LAUNCHER · 1.2.2</p>
         <h1>把方块世界<br /><em>装进一个启动器。</em></h1>
         <p class="lead">白色雪原主题，完整离线运行环境。版本、Mod、联机、开服与皮肤，一个窗口全部搞定。</p>
         <div class="version-toolbar hero-version-toolbar">
@@ -71,8 +71,8 @@
       </div>
       <div class="download-card">
         <div>
-          <div class="badges"><span id="version-badge">v1.2.1</span><span>Windows x64</span><span id="version-kind">最新版</span></div>
-          <h3 id="download-title">TCL启动器 1.2.1</h3>
+          <div class="badges"><span id="version-badge">v1.2.2</span><span>Windows x64</span><span id="version-kind">最新版</span></div>
+          <h3 id="download-title">TCL启动器 1.2.2</h3>
           <p id="download-desc">完整 Electron 运行时 · 约 106 MB · 2026.10.26</p>
           <a id="download-link" class="button primary wide" data-download href="#">前往 GitHub Release 下载</a>
           <p class="small">下载后解压，双击根目录里的 exe。历史版本使用旧品牌与旧界面，仅用于回退。</p>
@@ -80,8 +80,8 @@
         <aside>
           <h4>文件信息</h4>
           <dl>
-            <div><dt>文件名</dt><dd><code id="file-name">TCL-1.2.1-win-x64.zip</code></dd></div>
-            <div><dt>大小</dt><dd id="file-size">108,250,259 字节</dd></div>
+            <div><dt>文件名</dt><dd><code id="file-name">TCL-1.2.2-win-x64.zip</code></dd></div>
+            <div><dt>大小</dt><dd id="file-size">108,250,313 字节</dd></div>
             <div><dt>SHA-256</dt><dd><code id="file-sha">FDEE6669…25619E31</code></dd></div>
             <div><dt>运行方式</dt><dd>解压后双击根目录 exe</dd></div>
             <div><dt>数据目录</dt><dd><code>%APPDATA%\TungbrosLauncher</code></dd></div>
@@ -124,13 +124,14 @@
   <footer>
     <div class="footer-brand"><img src="assets/img/logo.png" alt="" width="28" height="28" /><span>TCL启动器</span></div>
     <p>与 Mojang Studios、Microsoft 无隶属关系。Minecraft 是 Mojang Studios 的商标。</p>
-    <span>v1.2.1 · Windows x64</span>
+    <span>v1.2.2 · Windows x64</span>
   </footer>
 
   <script>
     const REPO = "Tungbro/TCL-Launcher";
     let VERSIONS = [
-      { version: "1.2.1", tag: "v1.2.1", file: "TCL-1.2.1-win-x64.zip", size: 108250259, date: "2026.10.26", latest: true, note: "TCL 白色主题 · 完整离线版", sha: "862EB0DB40CD3EE4B9CED3BB27F89EDD4451E34B6835216AC5A2DCB7DA4CA936" },
+      { version: "1.2.2", tag: "v1.2.2", file: "TCL-1.2.2-win-x64.zip", size: 108250313, date: "2026.10.26", latest: true, note: "TCL 1.2.2 · 中文搜索与模组详情", sha: "4A9A1BD265B360C8BF2514DABC19EE8FFACDDB5AB85546D5919F73A40334C26D" },
+      { version: "1.2.1", tag: "v1.2.1", file: "TCL-1.2.1-win-x64.zip", size: 108250259, date: "2026.10.26", latest: false, note: "TCL 白色主题 · 完整离线版", sha: "862EB0DB40CD3EE4B9CED3BB27F89EDD4451E34B6835216AC5A2DCB7DA4CA936" },
       { version: "1.2.0", tag: "v1.2.0", file: "Tungbros-1.2.0-win-x64.zip", size: 141553376, date: "2026.10.25", note: "旧品牌 Tungbro's · 历史版本", sha: "18FC35436312AD26AF2CA5AE32868875B111E1390B1431E723CE9A1B3F044AA8" },
       { version: "1.1.3", tag: "v1.1.3", file: "Tungbros-1.1.3-win-x64.zip", size: 137716154, date: "2026.10.24", note: "历史版本 · 启动修复", sha: "7AB464D3345C353D9A373F8160B79810E489B46DB01EC4435918E30FA0A2D70D" },
       { version: "1.1.2", tag: "v1.1.2", file: "Tungbros-1.1.2-win-x64.zip", size: 137715643, date: "2026.10.23", note: "历史版本 · 下载路径修复", sha: "0A36D18D22338CCACDC50DB9E176E5AB60944C0D12635C40391A588B8C969EE2" },
