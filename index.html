@@ -28,6 +28,7 @@
 .source-badge{display:inline-block;margin-left:6px;padding:2px 5px;border-radius:4px;background:#eef7e2;color:#4b7d2a;font-size:9px}
 @media(max-width:520px){.download-source-box{padding:17px}.source-option{padding:10px}}
 </style>
+<style>.archive-hint{margin:8px 0 0;color:#67745f;font-size:11px;line-height:1.55}.archive-hint::before{content:"压缩包";display:inline-block;margin-right:6px;padding:1px 5px;border-radius:4px;background:#eef7e2;color:#4b7d2a;font-size:9px;font-weight:700}</style>
 </head>
 <body>
   <header class="site-header">
@@ -95,6 +96,7 @@
           <h3 id="download-title">KCL启动器 1.5.2.54</h3>
           <p id="download-desc">完整 Electron 运行时 · 约 70 MB · 2026.10.26</p>
           <a id="download-link" class="button primary wide" data-download href="#">前往 GitHub Release 下载</a>
+          <p class="archive-hint" id="archive-hint">.7z 压缩包，需要先用 7-Zip 或 WinRAR 解压，再运行 KCL启动器.exe。</p>
           <p class="small">KCL 仅支持 Windows 电脑端。下载后解压，双击根目录里的 exe。历史版本使用旧品牌与旧界面，仅用于回退。</p>
         </div>
         <aside>
@@ -232,6 +234,8 @@
       document.getElementById("download-link").download = v.file;
       document.getElementById("download-title").textContent = `KCL启动器 ${v.version}`;
       document.getElementById("download-desc").textContent = `${v.note} · 约 ${Math.round(v.size / 1048576)} MB · ${v.date}`;
+      const hint = document.getElementById("archive-hint");
+      if (hint) hint.textContent = v.file.toLowerCase().endsWith(".7z") ? ".7z 压缩包，需要先用 7-Zip 或 WinRAR 解压，再运行 KCL启动器.exe。" : "ZIP 压缩包，需要先解压，再运行 KCL启动器.exe。";
       document.getElementById("version-badge").textContent = `v${v.version}`;
       document.getElementById("version-kind").textContent = v.latest ? "最新版" : "历史版本";
       document.getElementById("version-status").textContent = v.latest ? "当前为最新版" : "当前为历史版本";
