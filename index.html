@@ -8,6 +8,26 @@
   <meta name="theme-color" content="#eef3e8" />
   <link rel="icon" href="assets/img/favicon.png" />
   <link rel="stylesheet" href="assets/css/site.css" />
+<style>
+.download-source-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(10,20,12,.45);backdrop-filter:blur(4px)}
+.download-source-modal[hidden]{display:none}
+.download-source-box{width:min(520px,100%);background:#fbfdf8;border:1px solid #dbe6d0;border-radius:16px;box-shadow:0 24px 70px rgba(20,45,18,.25);padding:22px;color:#172414}
+.download-source-box .source-kicker{font-size:10px;letter-spacing:.12em;color:#5f9f2d;font-weight:700}
+.download-source-box h3{margin:5px 0 4px;font-size:22px}
+.download-source-box .source-sub{color:#67745f;font-size:12px;line-height:1.6;margin:0 0 15px}
+.source-options{display:grid;gap:8px}
+.source-option{display:flex;align-items:center;gap:11px;width:100%;padding:12px;border:1px solid #dce7d2;border-radius:10px;background:#fff;color:#172414;text-align:left;text-decoration:none;cursor:pointer}
+.source-option:hover{border-color:#8fbe55;background:#f5faef}
+.source-option .source-icon{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;background:#edf7df;color:#4b7d2a;font-weight:800;flex:none}
+.source-option strong{display:block;font-size:12px}
+.source-option small{display:block;color:#6b7862;font-size:10px;margin-top:2px}
+.source-option .source-arrow{margin-left:auto;color:#6d7a63}
+.source-option.disabled{opacity:.5;pointer-events:none}
+.source-note{padding:9px 10px;border-radius:8px;background:#fff8e8;color:#7a5b1b;font-size:10px;line-height:1.6;margin:10px 0 0}
+.source-close{display:block;margin:14px 0 0 auto;border:0;background:transparent;color:#67745f;font:inherit;font-size:11px;cursor:pointer}
+.source-badge{display:inline-block;margin-left:6px;padding:2px 5px;border-radius:4px;background:#eef7e2;color:#4b7d2a;font-size:9px}
+@media(max-width:520px){.download-source-box{padding:17px}.source-option{padding:10px}}
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -40,7 +60,7 @@
           <a class="button primary" data-download href="#">下载完整离线版</a>
           <a class="button ghost" href="#features">看看功能</a>
         </div>
-        <p class="hero-meta">Windows x64 · ZIP · 约 106 MB · 解压即用 · 无需管理员权限</p>
+        <p class="hero-meta">Windows x64 · 7z · 约 70 MB · 解压即用 · 无需管理员权限</p>
       </div>
       <div class="hero-shot">
         <div class="window-bar"><i></i><i></i><i></i><span>KCL启动器</span></div>
@@ -73,15 +93,15 @@
         <div>
           <div class="badges"><span id="version-badge">v1.5.2.54</span><span>Windows x64</span><span id="version-kind">最新版</span></div>
           <h3 id="download-title">KCL启动器 1.5.2.54</h3>
-          <p id="download-desc">完整 Electron 运行时 · 约 106 MB · 2026.10.26</p>
+          <p id="download-desc">完整 Electron 运行时 · 约 70 MB · 2026.10.26</p>
           <a id="download-link" class="button primary wide" data-download href="#">前往 GitHub Release 下载</a>
           <p class="small">KCL 仅支持 Windows 电脑端。下载后解压，双击根目录里的 exe。历史版本使用旧品牌与旧界面，仅用于回退。</p>
         </div>
         <aside>
           <h4>文件信息</h4>
           <dl>
-            <div><dt>文件名</dt><dd><code id="file-name">KCL-1.5.2.54-win-x64.zip</code></dd></div>
-            <div><dt>大小</dt><dd id="file-size">108,259,786 字节</dd></div>
+            <div><dt>文件名</dt><dd><code id="file-name">KCL-1.5.2.54-win-x64.7z</code></dd></div>
+            <div><dt>大小</dt><dd id="file-size">73,123,661 字节</dd></div>
             <div><dt>SHA-256</dt><dd><code id="file-sha">FDEE6669…25619E31</code></dd></div>
             <div><dt>运行方式</dt><dd>解压后双击根目录 exe</dd></div>
             <div><dt>数据目录</dt><dd><code>%APPDATA%\TungbrosLauncher</code></dd></div>
@@ -155,7 +175,7 @@
   <script>
     const REPO = "Tungbro/TCL-Launcher";
     let VERSIONS = [
-      { version: "1.5.2.54", tag: "v1.5.2.54", file: "KCL-1.5.2.54-win-x64.zip", size: 108259786, date: "2026.10.26", latest: true, note: "KCL 1.5.2.54 · 品牌改名与启动器内更新", sha: "BE15AC3ADB3643B99CE05CC394C27D14E1D2C66AF287C1575BC4859AA478B086" },
+      { version: "1.5.2.54", tag: "v1.5.2.54", file: "KCL-1.5.2.54-win-x64.7z", size: 73123661, date: "2026.10.27", latest: true, note: "KCL 1.5.2.54 · K 图标与品牌同步", sha: "1C5ECE7E56140BEE3D5EE30B73997510EA4E24CACBE1B3A82842D1DA2974899F" },
       { version: "1.3.9.24", tag: "v1.3.9.24", file: "TCL-1.3.9.24-win-x64.zip", size: 108257584, date: "2026.10.26", latest: false, note: "TCL 1.3.9.24 · 桌面快捷方式、品牌版本号与启动优化", sha: "8E9E547ADF791EC8F41F50B4B473C453DC1ABDFDBAC90FD50523FDEB025FD83B" },
       { version: "1.3.9.10", tag: "v1.3.9.10", file: "TCL-1.3.9.10-win-x64.zip", size: 108257395, date: "2026.10.26", latest: false, note: "TCL 1.3.9.10 · 游戏内皮肤同步与模组图标", sha: "F08D0823E92C183BFA9F74452784E6A6C96515824F98115A5E22B048BE1231D1" },
       { version: "1.3.8", tag: "v1.3.8", file: "TCL-1.3.8-win-x64.zip", size: 108256253, date: "2026.10.26", latest: false, note: "TCL 1.3.8 · 音乐歌词高亮/跳转修复与快照/愚人节下载", sha: "A582EEF7871A327C6F1633AD3385004D2E29953F06975BDBE5E9FAB973F72211" },
@@ -232,7 +252,7 @@
         const remote = releases
           .filter((release) => !release.draft)
           .map((release) => {
-            const zip = (release.assets || []).find((asset) => /\.zip$/i.test(asset.name) && !/\.sha256$/i.test(asset.name));
+            const zip = (release.assets || []).find((asset) => /\.(zip|7z)$/i.test(asset.name) && !/\.sha256$/i.test(asset.name));
             if (!zip) return null;
             const version = String(release.tag_name || zip.name).replace(/^v/i, "").split("-win-")[0];
             return {
@@ -284,5 +304,97 @@
     renderVersions();
     loadLatestReleases();
   </script>
+
+<div class="download-source-modal" id="download-source-modal" hidden>
+  <div class="download-source-box" role="dialog" aria-modal="true" aria-labelledby="source-title">
+    <span class="source-kicker">CHOOSE DOWNLOAD SOURCE</span>
+    <h3 id="source-title">选择下载方式</h3>
+    <p class="source-sub" id="source-version"></p>
+    <div class="source-options">
+      <a class="source-option" id="source-github" href="#" target="_blank" rel="noopener">
+        <span class="source-icon">GH</span>
+        <span><strong>GitHub Release</strong><small id="source-github-note">官方原始文件</small></span>
+        <span class="source-arrow">→</span>
+      </a>
+      <a class="source-option" id="source-123" href="#" target="_blank" rel="noopener">
+        <span class="source-icon">123</span>
+        <span><strong>123 云盘</strong><small id="source-123-note">国内加速下载</small></span>
+        <span class="source-arrow">→</span>
+      </a>
+    </div>
+    <p class="source-note" id="source-123-code" hidden></p>
+    <p class="source-note" id="source-unsupported" hidden>当前版本只提供 GitHub 下载。123 云盘目前仅支持 KCL 1.5.2.54。</p>
+    <button class="source-close" type="button" id="source-close">取消</button>
+  </div>
+</div>
+
+
+<script>
+const CLOUD123 = {
+  "1.5.2.54": {
+    url: "https://1851967338.share.123pan.cn/123pan/6a0Jvd-wILcA?pwd=1KCL#",
+    code: "1KCL",
+    file: "KCL-1.5.2.54-win-x64.zip"
+  }
+};
+function openDownloadSource(index) {
+  const v = VERSIONS[index];
+  if (!v) return;
+  const modal = document.getElementById("download-source-modal");
+  const github = document.getElementById("source-github");
+  const cloud = document.getElementById("source-123");
+  const note = document.getElementById("source-123-note");
+  const code = document.getElementById("source-123-code");
+  const unsupported = document.getElementById("source-unsupported");
+  document.getElementById("source-title").textContent = `下载 KCL ${v.version}`;
+  document.getElementById("source-version").textContent = `${v.file} · ${(v.size / 1048576).toFixed(1)} MB · ${v.date}`;
+  github.href = assetUrl(v);
+  github.download = v.file;
+  document.getElementById("source-github-note").textContent = v.file.endsWith(".7z") ? "GitHub 原始 7z 压缩包" : "GitHub 原始 ZIP 包";
+  const c = CLOUD123[v.version];
+  if (c) {
+    cloud.classList.remove("disabled");
+    cloud.href = c.url;
+    note.textContent = `123 云盘文件：${c.file} · 提取码 ${c.code}`;
+    code.hidden = false;
+    code.textContent = `提取码：${c.code}（打开后会自动带入链接参数）`;
+    unsupported.hidden = true;
+  } else {
+    cloud.classList.add("disabled");
+    cloud.href = "#";
+    note.textContent = "该版本暂无 123 云盘文件";
+    code.hidden = true;
+    unsupported.hidden = false;
+  }
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+function closeDownloadSource() {
+  const modal = document.getElementById("download-source-modal");
+  if (modal) modal.hidden = true;
+  document.body.style.overflow = "";
+}
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("[data-download]");
+  if (link) {
+    event.preventDefault();
+    const index = Number(document.getElementById("version-select").value) || 0;
+    openDownloadSource(index);
+    return;
+  }
+  const versionButton = event.target.closest("[data-version]");
+  if (versionButton) {
+    const index = Number(versionButton.dataset.version);
+    if (Number.isFinite(index)) {
+      setTimeout(() => openDownloadSource(index), 0);
+    }
+  }
+}, true);
+document.getElementById("source-close").addEventListener("click", closeDownloadSource);
+document.getElementById("download-source-modal").addEventListener("click", (event) => {
+  if (event.target.id === "download-source-modal") closeDownloadSource();
+});
+</script>
+
 </body>
 </html>
