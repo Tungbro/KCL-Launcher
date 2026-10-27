@@ -359,7 +359,7 @@
       </a>
     </div>
     <p class="source-note" id="source-123-code" hidden></p>
-    <p class="source-note" id="source-unsupported" hidden>当前版本只提供 GitHub 下载。123 云盘目前支持 KCL 1.5.8 与 1.5.2.54。</p>
+    <p class="source-note" id="source-unsupported" hidden>当前版本只提供 GitHub 下载。123 云盘目前支持 KCL 1.5.5 与 1.5.2.54。</p>
     <button class="source-close" type="button" id="source-close">取消</button>
   </div>
 </div>
@@ -403,7 +403,7 @@ function openDownloadSource(index) {
     second.hidden = false;
     second.classList.remove("disabled");
     second.href = sevenUrl;
-    second.download = v.sevenFile || "KCL-1.5.8-win-x64.zip";
+    second.download = v.sevenFile || "KCL-1.5.8-win-x64.7z";
     document.getElementById("source-github-second-title").textContent = "GitHub 7z 压缩包";
     document.getElementById("source-github-second-note").textContent = "另一种压缩格式，体积更小";
   } else if (hasGithub && !zipUrl && sevenUrl) {
