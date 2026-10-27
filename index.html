@@ -256,7 +256,7 @@
         const remote = releases
           .filter((release) => !release.draft)
           .map((release) => {
-            const zip = (release.assets || []).find((asset) => /\.(zip|7z)$/i.test(asset.name) && !/\.sha256$/i.test(asset.name));
+            const zip = (release.assets || []).find((asset) => /\.(zip|7z)$/i.test(asset.name) && !/\.sha256$/i.test(asset.name) && !/source/i.test(asset.name));
             if (!zip) return null;
             const version = String(release.tag_name || zip.name).replace(/^v/i, "").split("-win-")[0];
             return {
@@ -274,9 +274,15 @@
           .filter(Boolean)
           .sort((a, b) => versionRank(b.version) - versionRank(a.version));
         if (!remote.length) throw new Error("没有可下载的 Release 资产");
-        remote[0].latest = true;
-        VERSIONS = remote;
-        renderVersions();
+	        const cloudMap = typeof CLOUD123 !== "undefined" ? CLOUD123 : {};
+	        const cloudOnly = VERSIONS
+	          .filter((v) => cloudMap[v.version] && !remote.some((r) => r.version === v.version))
+	          .map((v) => ({ ...v, file: cloudMap[v.version].file, github: false, url: "", note: `${v.note} · 123 云盘` }));
+	        const merged = [...remote, ...cloudOnly].sort((a, b) => versionRank(b.version) - versionRank(a.version));
+	        if (!merged.length) throw new Error("娌℃湁鍙笅杞界殑 Release 璧勪骇");
+	        merged[0].latest = true;
+	        VERSIONS = merged;
+	        renderVersions();
         document.getElementById("version-status").textContent = "已同步 GitHub Releases";
       } catch (error) {
         console.warn("Release 同步失败，使用内置版本列表：", error);
@@ -358,9 +364,11 @@ function openDownloadSource(index) {
   const unsupported = document.getElementById("source-unsupported");
   document.getElementById("source-title").textContent = `下载 KCL ${v.version}`;
   document.getElementById("source-version").textContent = `${v.file} · ${(v.size / 1048576).toFixed(1)} MB · ${v.date}`;
-  github.href = assetUrl(v);
+  const hasGithub = v.github !== false;
+  github.classList.toggle("disabled", !hasGithub);
+  github.href = hasGithub ? assetUrl(v) : "#";
   github.download = v.file;
-  document.getElementById("source-github-note").textContent = v.file.endsWith(".7z") ? "GitHub 原始 7z 压缩包" : "GitHub 原始 ZIP 包";
+  document.getElementById("source-github-note").textContent = v.github === false ? "该版本暂无 GitHub 文件，请使用 123 云盘" : (v.file.endsWith(".7z") ? "GitHub 原始 7z 压缩包" : "GitHub 原始 ZIP 包");
   const c = CLOUD123[v.version];
   if (c) {
     cloud.classList.remove("disabled");
