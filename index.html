@@ -273,13 +273,12 @@
           })
           .filter(Boolean)
           .sort((a, b) => versionRank(b.version) - versionRank(a.version));
-        if (!remote.length) throw new Error("没有可下载的 Release 资产");
 	        const cloudMap = typeof CLOUD123 !== "undefined" ? CLOUD123 : {};
 	        const cloudOnly = VERSIONS
 	          .filter((v) => cloudMap[v.version] && !remote.some((r) => r.version === v.version))
 	          .map((v) => ({ ...v, file: cloudMap[v.version].file, github: false, url: "", note: `${v.note} · 123 云盘` }));
 	        const merged = [...remote, ...cloudOnly].sort((a, b) => versionRank(b.version) - versionRank(a.version));
-	        if (!merged.length) throw new Error("娌℃湁鍙笅杞界殑 Release 璧勪骇");
+	        if (!merged.length) throw new Error("没有可下载的 Release 资产");
 	        merged[0].latest = true;
 	        VERSIONS = merged;
 	        renderVersions();
@@ -312,7 +311,7 @@
       });
     });
     renderVersions();
-    loadLatestReleases();
+    setTimeout(loadLatestReleases, 0);
   </script>
 
 <div class="download-source-modal" id="download-source-modal" hidden>
