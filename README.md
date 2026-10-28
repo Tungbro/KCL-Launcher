@@ -1,4 +1,4 @@
-# TCL启动器 · 网站
+# KCL启动器 · 网站
 
 纯静态中文宣传站，包含 TCL启动器 1.2.1 下载入口与 MKZY 服务器信息。
 
@@ -34,7 +34,7 @@ const TCL_DOWNLOAD_URL = "https://github.com/YOUR_NAME/TCL-Launcher/releases/dow
 
 - `index.html`：页面
 - `assets/css/site.css`：白色主题样式
-- `assets/img/logo.png`：TCL 标识
+- `assets/img/logo.png`：KCL 标识
 - `assets/img/screenshots/home-white.png`：启动器白色主题截图
 - `assets/img/backgrounds/daylight.svg`：白昼雪原背景
 
