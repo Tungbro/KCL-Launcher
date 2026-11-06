@@ -1,0 +1,47 @@
+name: Build KCL macOS Universal
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - name: Download source
+        run: |
+          curl -L --fail --retry 3 -o source.tar.gz \
+            "https://github.com/Tungbro/KCL-Launcher/releases/download/v1.8.0/KCL-mac-source.tar.gz"
+          mkdir -p kcl
+          tar -xzf source.tar.gz -C kcl
+
+      - name: Install dependencies
+        working-directory: kcl
+        run: npm install --no-audit --no-fund
+
+      - name: Build renderer
+        working-directory: kcl
+        run: npm run build
+
+      - name: Build universal app
+        working-directory: kcl
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: npx electron-builder --mac --universal --dir
+
+      - name: Package app
+        working-directory: kcl
+        run: |
+          APP=$(find release -maxdepth 3 -name '*.app' -type d | head -1)
+          echo "app=$APP"
+          test -n "$APP"
+          ditto -c -k --sequesterRsrc --keepParent "$APP" "KCL-1.8.0-mac-universal.zip"
+          ls -lh "KCL-1.8.0-mac-universal.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: KCL-1.8.0-mac-universal
+          path: kcl/KCL-1.8.0-mac-universal.zip
+          if-no-files-found: error
