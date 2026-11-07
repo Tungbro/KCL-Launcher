@@ -61,7 +61,7 @@
           <a class="button primary" data-download href="#">下载完整离线版</a>
           <a class="button ghost" href="#features">看看功能</a>
         </div>
-        <p class="hero-meta">Windows x64 · 7z · 约 70 MB · 解压即用 · 无需管理员权限</p>
+        <p class="hero-meta">Windows x64 / macOS Universal · 7z / zip · 解压即用</p>
       </div>
       <div class="hero-shot">
         <div class="window-bar"><i></i><i></i><i></i><span>KCL启动器</span></div>
@@ -97,7 +97,7 @@
           <p id="download-desc">完整 Electron 运行时 · 约 70 MB · 2026.10.26</p>
           <a id="download-link" class="button primary wide" data-download href="#">前往 GitHub Release 下载</a>
           <p class="archive-hint" id="archive-hint">.7z 压缩包，需要先用 7-Zip 或 WinRAR 解压，再运行 KCL启动器.exe。</p>
-          <p class="small">KCL 仅支持 Windows 电脑端。下载后解压，双击根目录里的 exe。历史版本使用旧品牌与旧界面，仅用于回退。</p>
+          <p class="small">Windows 版下载后解压，双击根目录里的 exe；macOS 版见下方卡片。历史版本使用旧品牌与旧界面，仅用于回退。</p>
         </div>
         <aside>
           <h4>文件信息</h4>
@@ -111,13 +111,33 @@
           <button type="button" class="copy-sha" data-copy-sha>复制完整 SHA-256</button>
         </aside>
       </div>
+
+      <div class="download-card" id="mac-download" style="margin-top:14px;">
+        <div>
+          <div class="badges"><span>macOS</span><span>Universal</span><span>Intel + Apple Silicon</span></div>
+          <h3>KCL启动器 1.8.0 macOS 版</h3>
+          <p>Universal 通用包，同时支持 Intel Mac 和 Apple Silicon。当前为未签名版本。</p>
+          <a class="button primary wide" href="https://1851967338.share.123pan.cn/123pan/6a0Jvd-plrcA?pwd=1KCL#" target="_blank" rel="noopener">前往 123 云盘下载 macOS 版</a>
+          <p class="archive-hint">.zip 压缩包，解压后得到 KCL.app；首次打开需右键 → 打开，或执行 xattr -cr KCL.app。</p>
+          <p class="small">这是 macOS 电脑版，不是 iPhone 版。文件签名未做 Apple 公证。</p>
+        </div>
+        <aside>
+          <h4>文件信息</h4>
+          <dl>
+            <div><dt>文件名</dt><dd><code>KCL-1.8.0-mac-universal.zip</code></dd></div>
+            <div><dt>提取码</dt><dd><code>1KCL</code></dd></div>
+            <div><dt>架构</dt><dd>Universal（x64 + arm64）</dd></div>
+            <div><dt>运行方式</dt><dd>解压后打开 KCL.app</dd></div>
+          </dl>
+        </aside>
+      </div>
     </section>
 
     <section class="section" id="fcl">
       <div class="section-head">
         <span>03 / MOBILE</span>
         <h2>FCL · 手机端启动器</h2>
-        <p>FCL 是面向 Android 手机的 Minecraft 启动器。KCL 仅支持 Windows 电脑端，手机玩家请使用 FCL。</p>
+        <p>FCL 是面向 Android 手机的 Minecraft 启动器。KCL 提供 Windows 与 macOS 电脑版，手机玩家请使用 FCL。</p>
       </div>
       <div class="download-card" style="align-items:center;">
         <div>
@@ -130,7 +150,7 @@
         <aside>
           <h4>平台说明</h4>
           <dl>
-            <div><dt>KCL</dt><dd>Windows x64 · 电脑端</dd></div>
+            <div><dt>KCL</dt><dd>Windows x64 / macOS Universal · 电脑端</dd></div>
             <div><dt>FCL</dt><dd>Android · 手机端</dd></div>
             <div><dt>来源</dt><dd>FCL 官方 GitHub</dd></div>
           </dl>
@@ -357,15 +377,29 @@
         <span><strong>123 云盘</strong><small id="source-123-note">国内加速下载</small></span>
         <span class="source-arrow">→</span>
       </a>
+      <a class="source-option" id="source-lanzou" href="#" target="_blank" rel="noopener">
+        <span class="source-icon">蓝</span>
+        <span><strong>蓝奏云</strong><small id="source-lanzou-note">Windows 1.8.0 备用下载</small></span>
+        <span class="source-arrow">→</span>
+      </a>
     </div>
     <p class="source-note" id="source-123-code" hidden></p>
-    <p class="source-note" id="source-unsupported" hidden>当前版本只提供 GitHub 下载。123 云盘目前支持 KCL 1.8.0、1.7.54、1.7.52、1.7.0、1.6.8、1.6.6、1.6.5、1.6.2、1.5.8、1.5.5 与 1.5.2.54。</p>
+    <p class="source-note" id="source-lanzou-code" hidden></p>
+    <p class="source-note" id="source-unsupported" hidden>当前版本暂无云盘文件。123 云盘支持 KCL 1.8.0 等版本；蓝奏云目前提供 Windows 1.8.0。</p>
     <button class="source-close" type="button" id="source-close">取消</button>
   </div>
 </div>
 
 
 <script>
+const LANZOU = {
+  "1.8.0": {
+    url: "https://wwbji.lanzoue.com/ighxH4f11ota",
+    code: "g4b2",
+    file: "KCL-1.8.0-win-x64.7z"
+  }
+};
+
 const CLOUD123 = {
   "1.8.0": {
     url: "https://1851967338.share.123pan.cn/123pan/6a0Jvd-AMseA?pwd=1KCL#",
@@ -479,6 +513,22 @@ function openDownloadSource(index) {
     note.textContent = "该版本暂无 123 云盘文件";
     code.hidden = true;
     unsupported.hidden = false;
+  }
+  const lz = LANZOU[v.version];
+  const lanzou = document.getElementById("source-lanzou");
+  const lanzouNote = document.getElementById("source-lanzou-note");
+  const lanzouCode = document.getElementById("source-lanzou-code");
+  if (lz) {
+    lanzou.classList.remove("disabled");
+    lanzou.href = lz.url;
+    lanzouNote.textContent = `${lz.file} · 密码 ${lz.code}`;
+    lanzouCode.hidden = false;
+    lanzouCode.textContent = `蓝奏云密码：${lz.code}`;
+  } else {
+    lanzou.classList.add("disabled");
+    lanzou.href = "#";
+    lanzouNote.textContent = "当前版本暂无蓝奏云文件";
+    lanzouCode.hidden = true;
   }
   modal.hidden = false;
   document.body.style.overflow = "hidden";
